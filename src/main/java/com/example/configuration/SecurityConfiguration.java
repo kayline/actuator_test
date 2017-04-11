@@ -16,15 +16,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private static final String USER_ROLE = "USER";
     private static final String ACTUATOR = "ACTUATOR";
 
-    @Override
-    public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/health");
-    }
+//    @Override
+//    public void configure(WebSecurity web) throws Exception {
+//        web.ignoring().antMatchers("/health");
+//    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
+                    .antMatchers("/health").permitAll()
                     .anyRequest().hasRole(USER_ROLE)
                     .and()
                 .httpBasic()
